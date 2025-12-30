@@ -1,0 +1,19 @@
+{
+  "winter": {
+    "temperature": {
+      "critical_low": -15.0,
+      "critical_high": 30.0
+    },
+    "humidity": {
+      "critical_high": 85.0
+    }
+  },
+  "summer": {
+    "temperature": {
+      "critical_high": 35.0
+    },
+    "humidity": {
+      "critical_high": 80.0
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "winter": {
+    "temperature": {
+      "min_comfort": 18.0,
+      "max_comfort": 24.0,
+      "critical_low": 15.0,
+      "critical_high": 26.0
+    },
+    "humidity": {
+      "min_comfort": 30.0,
+      "max_comfort": 60.0,
+      "critical_low": 20.0,
+      "critical_high": 70.0
+    }
+  },
+  "summer": {
+    "temperature": {
+      "min_comfort": 20.0,
+      "max_comfort": 26.0,
+      "critical_low": 18.0,
+      "critical_high": 28.0
+    },
+    "humidity": {
+      "min_comfort": 40.0,
+      "max_comfort": 65.0,
+      "critical_low": 30.0,
+      "critical_high": 75.0
+    }
+  }
+}
