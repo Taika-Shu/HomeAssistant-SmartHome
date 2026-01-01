@@ -1,0 +1,65 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
+function App() {
+  const [status, setStatus] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchStatus();
+    const interval = setInterval(fetchStatus, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const fetchStatus = async () => {
+    try {
+      const response = await axios.get('http://localhost:8080/api/status');
+      setStatus(response.data);
+      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching status:', error);
+    }
+  };
+
+  const sendCommand = async (cmd) => {
+    try {
+      await axios.post('http://localhost:8080/api/command', {
+        command: cmd
+      });
+      alert(`Command ${cmd} sent successfully`);
+      fetchStatus();
+    } catch (error) {
+      console.error('Error sending command:', error);
+      alert('Error sending command');
+    }
+  };
+
+  if (loading) {
+    return <div style={{ padding: '50px', textAlign: 'center' }}>Loading...</div>;
+  }
+
+  return (
+    <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
+      <h1>HomeAssistant Smart Home Dashboard</h1>
+      <p>Status: <strong>{status.status}</strong></p>
+      <p>Temperature: <strong>{status.temperature}°C</strong></p>
+      <p>Humidity: <strong>{status.humidity}%</strong></p>
+      <p>Version: <strong>{status.version}</strong></p>
+      
+      <div style={{ marginTop: '20px' }}>
+        <h3>Commands:</h3>
+        <button onClick={() => sendCommand('!1')} style={{ margin: '5px', padding: '10px' }}>
+          Use Home Assistant Data
+        </button>
+        <button onClick={() => sendCommand('!2')} style={{ margin: '5px', padding: '10px' }}>
+          Use Virtual Data
+        </button>
+        <button onClick={() => sendCommand('ok')} style={{ margin: '5px', padding: '10px' }}>
+          Acknowledge Alerts
+        </button>
+      </div>
+    </div>
+  );
+}
+
+export default App;
